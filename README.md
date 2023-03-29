@@ -5,12 +5,14 @@ One solution for this problem is running a reverse proxy in the front of the app
 Kubernetes Sidecar proxy deployment:
 The Sidecar proxy pattern is used to provide basic authentication for an application without authentication itself. The proxy has a container port exposed on port 0.0.0.0:80 and is available to other pods. The application container has no container pods exposed and will only listen to requests on the loopback device on port 127.0.01:8080.
  
-Sidecar proxy example
+Sidecar proxy example:
 All code used in this example is available at https://github.com/eicnix/sidecar-proxy-example
 When connecting to the Pod using kubectl port-forward on port 80 it is required to submit the basic authentication credentials to proceed further:
 $ kubectl port-forward nginx-deployment-... 8080:80
+
 Forwarding from 127.0.0.1:8080 -> 80
 $ curl localhost:8080                                     
 
+$ curl localhost:8080 -u admin:admin
 
 
